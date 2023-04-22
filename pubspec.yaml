@@ -32,6 +32,8 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^4.0.3
+  video_player: ^2.6.1
+  bordered_text: ^2.0.0
 
 dev_dependencies:
 
