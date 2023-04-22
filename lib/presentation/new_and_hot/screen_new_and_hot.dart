@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app_clone/core/colors/colors.dart';
 import 'package:netflix_app_clone/core/constants.dart';
+import 'package:netflix_app_clone/presentation/new_and_hot/widgets/coming_soon_widget.dart';
 
 class ScreenNewAndHot extends StatelessWidget {
   const ScreenNewAndHot({super.key});
@@ -60,17 +61,22 @@ class ScreenNewAndHot extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            _buildTabBarView("Coming Soon"),
-            _buildTabBarView("Everyone's"),
+            _buildComingSoon(),
+            _buildEveryonesWatching(),
           ],
         ),
       ),
     );
   }
-  
-  _buildTabBarView(String name) {
-    return Center(
-      child: Text("$name"),
+
+  Widget _buildComingSoon() {
+    return ListView.builder(
+      itemCount: 10,
+      itemBuilder: (context, index) => const ComingSoonWidget(),
     );
+  }
+
+  Widget _buildEveryonesWatching() {
+    return const SizedBox();
   }
 }

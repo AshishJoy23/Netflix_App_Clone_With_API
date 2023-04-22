@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:netflix_app_clone/core/colors/colors.dart';
 import 'package:netflix_app_clone/core/constants.dart';
 import 'package:netflix_app_clone/presentation/home/widgets/background_card.dart';
 import 'package:netflix_app_clone/presentation/home/widgets/number_title_card.dart';
@@ -45,9 +46,9 @@ class ScreenHome extends StatelessWidget {
                 ),
                 scrollNotifier.value
                     ? AnimatedContainer(
-                      duration: const Duration(
-                        milliseconds: 1000,
-                      ),
+                        duration: const Duration(
+                          milliseconds: 1000,
+                        ),
                         width: double.infinity,
                         height: 90,
                         color: Colors.black.withOpacity(0.3),
@@ -82,13 +83,19 @@ class ScreenHome extends StatelessWidget {
                                   'TV Shows',
                                   style: kHomeAppbarText,
                                 ),
-                                Text(
-                                  'Movies',
-                                  style: kHomeAppbarText
-                                ),
-                                Text(
-                                  'Categories',
-                                  style: kHomeAppbarText,
+                                Text('Movies', style: kHomeAppbarText),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Categories',
+                                      style: kHomeAppbarText,
+                                    ),
+                                    const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: kButtonColorWhite,
+                                      size: 24,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
