@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app_clone/core/colors/colors.dart';
+import 'package:netflix_app_clone/core/colors.dart';
 import 'package:netflix_app_clone/core/constants.dart';
 import 'package:netflix_app_clone/presentation/new_and_hot/widgets/coming_soon_widget.dart';
+import 'package:netflix_app_clone/presentation/new_and_hot/widgets/everyones_watching_widget.dart';
 
 class ScreenNewAndHot extends StatelessWidget {
   const ScreenNewAndHot({super.key});
@@ -77,6 +78,10 @@ class ScreenNewAndHot extends StatelessWidget {
   }
 
   Widget _buildEveryonesWatching() {
-    return const SizedBox();
+    return ListView.builder(
+      itemCount: 10,
+      itemBuilder: (context, index) => const EveryonesWatchingWidget(),
+    );
   }
 }
+

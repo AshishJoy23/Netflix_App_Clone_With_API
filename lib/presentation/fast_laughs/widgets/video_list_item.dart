@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app_clone/core/colors/colors.dart';
+import 'package:netflix_app_clone/core/colors.dart';
 
 class VideoListItem extends StatelessWidget {
   final int index;

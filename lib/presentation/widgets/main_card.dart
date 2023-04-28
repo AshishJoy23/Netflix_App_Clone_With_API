@@ -6,6 +6,10 @@ class MainCard extends StatelessWidget {
     super.key,
   });
 
+  static const imageUrl =
+    'assets/downloads1.jpg';
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +21,7 @@ class MainCard extends StatelessWidget {
           borderRadius: kRadius10,
           image: const DecorationImage(
             fit: BoxFit.fill,
-            image: NetworkImage("https://www.themoviedb.org/t/p/w1280/p2G0aAb5lI4AycTC0UnBoY6zKs4.jpg"),
+            image: AssetImage(imageUrl),
           ),
         ),
       ),

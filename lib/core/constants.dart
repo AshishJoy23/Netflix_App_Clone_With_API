@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+//Sized Box
 const kWidth = SizedBox(
   width: 10,
 );
@@ -9,15 +11,22 @@ const kHeight = SizedBox(
 const kHeight20 = SizedBox(
   height: 20,
 );
+const kHeight50 = SizedBox(
+  height: 50,
+);
 
 //BorderRadius
 BorderRadius kRadius10 = BorderRadius.circular(10);
 BorderRadius kRadius30 = BorderRadius.circular(30);
 
 //Image
+
+const imageAppendUrl = "https://image.tmdb.org/t/p/w500";
+
 const kMainImage =
-    "https://www.themoviedb.org/t/p/w1280/8QJcLl8rpOlA3ys6Towbcxbu3UB.jpg";
-const newAndHotTempImage = "https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/ijynMfKQapWQM9Zz3rjgM3w62TF.jpg";
+    "assets/mainpage.jpg";
+const newAndHotTempImage = "assets/new&hot1.jpg";
+const newAndHotTempImage2 = "assets/new&hot2.jpg";
 
 //TextStyles
 TextStyle kHomeAppbarText = const TextStyle(

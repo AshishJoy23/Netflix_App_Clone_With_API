@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:netflix_app_clone/core/colors/colors.dart';
+import 'package:netflix_app_clone/core/colors.dart';
 import 'package:netflix_app_clone/core/constants.dart';
 import 'package:netflix_app_clone/presentation/home/widgets/background_card.dart';
 import 'package:netflix_app_clone/presentation/home/widgets/number_title_card.dart';
@@ -56,8 +56,8 @@ class ScreenHome extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Image.network(
-                                  "https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png",
+                                Image.asset(
+                                  "assets/netflix_logo.png",
                                   height: 60,
                                   width: 60,
                                 ),

@@ -3,7 +3,7 @@ import 'package:netflix_app_clone/core/constants.dart';
 import 'package:netflix_app_clone/presentation/search/widgets/title.dart';
 
 const imageUrl =
-    "https://www.themoviedb.org/t/p/w1280/6RVkFe6pSrifAcK2fOgb5GoAiyq.jpg";
+    'assets/downloads2.jpg';
 
 class SearchResultWidget extends StatelessWidget {
   const SearchResultWidget({super.key});
@@ -43,7 +43,7 @@ class MainCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: const DecorationImage(
-          image: NetworkImage(imageUrl),
+          image: AssetImage(imageUrl),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(8),

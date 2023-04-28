@@ -30,4 +30,3 @@ class ScreenDownloads extends StatelessWidget {
     );
   }
 }
-

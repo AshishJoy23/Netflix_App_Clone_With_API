@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:netflix_app_clone/core/colors/colors.dart';
+import 'package:netflix_app_clone/core/colors.dart';
+import 'package:netflix_app_clone/core/strings.dart';
+import 'package:netflix_app_clone/infrastructure/api_key.dart';
 import 'package:netflix_app_clone/presentation/downloads/screen_downloads.dart';
 import 'package:netflix_app_clone/presentation/fast_laughs/screen_fast_laughs.dart';
 import 'package:netflix_app_clone/presentation/home/screen_home.dart';
@@ -20,6 +24,7 @@ class ScreenMainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //log("$kBaseUrl/trending/all/day?api_key=$apiKey");
     return Scaffold(
       body: SafeArea(
         child: ValueListenableBuilder(
