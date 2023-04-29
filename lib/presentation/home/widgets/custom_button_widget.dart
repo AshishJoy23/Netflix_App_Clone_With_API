@@ -4,10 +4,10 @@ import 'package:netflix_app_clone/core/colors.dart';
 class CustomButtonWidget extends StatelessWidget {
   const CustomButtonWidget({
     super.key,
-    required  this.icon,
-    required this .title,
-    this.iconSize=30,
-    this.textSize=18,
+    required this.icon,
+    required this.title,
+    this.iconSize = 30,
+    this.textSize = 18,
     this.textLetterSpacing = 1,
     this.textWeight = FontWeight.normal,
     this.textColor = Colors.white,
@@ -29,13 +29,14 @@ class CustomButtonWidget extends StatelessWidget {
           color: kWhiteColor,
           size: iconSize,
         ),
-        Text(title,
-        style: TextStyle(
-          color: textColor,
-          fontSize: textSize,
-          fontWeight: textWeight,
-          letterSpacing: textLetterSpacing,
-        ),
+        Text(
+          title,
+          style: TextStyle(
+            color: textColor,
+            fontSize: textSize,
+            fontWeight: textWeight,
+            letterSpacing: textLetterSpacing,
+          ),
         ),
       ],
     );

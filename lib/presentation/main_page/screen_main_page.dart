@@ -14,7 +14,7 @@ import 'package:netflix_app_clone/presentation/search/screen_search.dart';
 class ScreenMainPage extends StatelessWidget {
   ScreenMainPage({super.key});
 
-  final pages  = [
+  final pages = [
     const ScreenHome(),
     const ScreenNewAndHot(),
     const ScreenFastLaughs(),
@@ -28,7 +28,7 @@ class ScreenMainPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ValueListenableBuilder(
-          valueListenable: indexChangeNotifier, 
+          valueListenable: indexChangeNotifier,
           builder: (context, int index, _) {
             return pages[index];
           },

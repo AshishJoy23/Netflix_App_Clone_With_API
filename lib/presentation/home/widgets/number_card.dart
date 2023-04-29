@@ -7,8 +7,7 @@ class NumberCardWidget extends StatelessWidget {
   final int index;
   const NumberCardWidget({super.key, required this.index});
 
-  static const imageUrl =
-    'assets/downloads2.jpg';
+  static const imageUrl = 'assets/downloads2.jpg';
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -25,8 +24,7 @@ class NumberCardWidget extends StatelessWidget {
                 borderRadius: kRadius10,
                 image: const DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage(
-                      imageUrl),
+                  image: AssetImage(imageUrl),
                 ),
               ),
             ),
@@ -38,7 +36,7 @@ class NumberCardWidget extends StatelessWidget {
             strokeColor: Colors.white,
             strokeWidth: 3.0,
             child: Text(
-              "${index+1}",
+              "${index + 1}",
               style: const TextStyle(
                 color: kBlackColor,
                 fontSize: 108,

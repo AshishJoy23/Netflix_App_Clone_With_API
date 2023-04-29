@@ -115,4 +115,3 @@ class ComingSoonWidget extends StatelessWidget {
     );
   }
 }
-

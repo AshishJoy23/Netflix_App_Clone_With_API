@@ -23,9 +23,11 @@ class ScreenDownloads extends StatelessWidget {
         ),
       ),
       body: ListView.separated(
-        padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           itemBuilder: (ctx, index) => widgetList[index],
-          separatorBuilder: (ctx, index) => const SizedBox(height: 20,),
+          separatorBuilder: (ctx, index) => const SizedBox(
+                height: 20,
+              ),
           itemCount: widgetList.length),
     );
   }

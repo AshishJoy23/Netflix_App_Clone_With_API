@@ -12,7 +12,7 @@ class BottomNavBarWidget extends StatelessWidget {
         builder: (context, int newIndex, _) {
           return BottomNavigationBar(
             currentIndex: newIndex,
-            onTap: (index){
+            onTap: (index) {
               indexChangeNotifier.value = index;
             },
             type: BottomNavigationBarType.fixed,
@@ -20,9 +20,7 @@ class BottomNavBarWidget extends StatelessWidget {
             selectedItemColor: Colors.white,
             unselectedItemColor: Colors.grey,
             selectedFontSize: 12,
-            selectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.bold
-            ),
+            selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
             selectedIconTheme: const IconThemeData(color: Colors.white),
             unselectedIconTheme: const IconThemeData(color: Colors.grey),
             items: const [

@@ -5,10 +5,7 @@ import 'package:netflix_app_clone/presentation/widgets/main_title.dart';
 
 class MainTitleCard extends StatelessWidget {
   final String title;
-  const MainTitleCard({
-    super.key,
-    required this.title
-  });
+  const MainTitleCard({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

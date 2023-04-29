@@ -13,7 +13,9 @@ class ScreenFastLaughs extends StatelessWidget {
           children: List.generate(
             10,
             (index) {
-              return VideoListItem(index: index,);
+              return VideoListItem(
+                index: index,
+              );
             },
           ),
         ),

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netflix_app_clone/core/constants.dart';
 import 'package:netflix_app_clone/presentation/search/widgets/title.dart';
 
-const imageUrl =
-    'assets/downloads2.jpg';
+const imageUrl = 'assets/downloads2.jpg';
 
 class SearchResultWidget extends StatelessWidget {
   const SearchResultWidget({super.key});
@@ -21,7 +20,7 @@ class SearchResultWidget extends StatelessWidget {
             crossAxisCount: 3,
             mainAxisSpacing: 8,
             crossAxisSpacing: 7,
-            childAspectRatio: 1/1.4,
+            childAspectRatio: 1 / 1.4,
             children: List.generate(
               21,
               (index) {

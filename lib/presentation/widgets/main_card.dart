@@ -6,9 +6,7 @@ class MainCard extends StatelessWidget {
     super.key,
   });
 
-  static const imageUrl =
-    'assets/downloads1.jpg';
-
+  static const imageUrl = 'assets/downloads1.jpg';
 
   @override
   Widget build(BuildContext context) {
