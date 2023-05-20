@@ -3,7 +3,9 @@ import 'package:netflix_app_clone/core/colors.dart';
 import 'package:netflix_app_clone/core/constants.dart';
 
 class VideoWidget extends StatelessWidget {
+  final String imageUrl;
   const VideoWidget({
+    required this.imageUrl,
     super.key,
   });
 
@@ -14,9 +16,43 @@ class VideoWidget extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           height: 200,
-          child: Image.asset(
-            newAndHotTempImage,
+          child: Image.network(
+            imageUrl,
             fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                );
+              }
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return Center(
+                child: Column(
+                  children: const [
+                    Icon(
+                      Icons.error,
+                      size: 80,
+                      color: Colors.red,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Error while loading image!',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
         Positioned(

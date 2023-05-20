@@ -3,10 +3,18 @@ import 'package:netflix_app_clone/core/colors.dart';
 import 'package:netflix_app_clone/core/constants.dart';
 import 'package:netflix_app_clone/presentation/home/widgets/custom_button_widget.dart';
 import 'package:netflix_app_clone/presentation/widgets/video_widget.dart';
+import 'package:share_plus/share_plus.dart';
 
 class EveryonesWatchingWidget extends StatelessWidget {
+  final String backdropPath;
+  final String movieName;
+  final String description;
+
   const EveryonesWatchingWidget({
     super.key,
+    required this.backdropPath,
+    required this.movieName,
+    required this.description,
   });
 
   @override
@@ -15,35 +23,44 @@ class EveryonesWatchingWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         kHeight,
-        const Text(
-          'Friends',
-          style: TextStyle(
+        Text(
+          movieName,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
             color: kWhiteColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
         kHeight,
-        const Text(
-          "This hit sitcom follows the merry misadventures of six 20-something pals as they navigate the pitfalls of work, life and love in 1980,s Manhatten.",
-          style: TextStyle(color: kGreyColor, fontWeight: FontWeight.w600),
+        Text(
+          description,
+          maxLines: 6,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(color: kGreyColor, fontWeight: FontWeight.w600),
         ),
         kHeight50,
-        const VideoWidget(),
+        VideoWidget(imageUrl: backdropPath),
         kHeight,
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            CustomButtonWidget(
-              icon: Icons.share,
-              title: 'Share',
-              iconSize: 26,
-              textSize: 14,
-              textWeight: FontWeight.bold,
-              textColor: kGreyColor,
+          children: [
+            GestureDetector(
+              onTap: () async{
+                await Share.share(movieName);
+              },
+              child: const CustomButtonWidget(
+                icon: Icons.share,
+                title: 'Share',
+                iconSize: 26,
+                textSize: 14,
+                textWeight: FontWeight.bold,
+                textColor: kGreyColor,
+              ),
             ),
             kWidth,
-            CustomButtonWidget(
+            const CustomButtonWidget(
               icon: Icons.add,
               title: 'My List',
               iconSize: 30,
@@ -52,7 +69,7 @@ class EveryonesWatchingWidget extends StatelessWidget {
               textColor: kGreyColor,
             ),
             kWidth,
-            CustomButtonWidget(
+            const CustomButtonWidget(
               icon: Icons.play_arrow,
               title: 'Play',
               iconSize: 30,

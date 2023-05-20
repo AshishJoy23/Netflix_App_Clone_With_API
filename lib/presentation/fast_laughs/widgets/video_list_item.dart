@@ -1,17 +1,51 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_app_clone/application/fast_laugh/fast_laugh_bloc.dart';
 import 'package:netflix_app_clone/core/colors.dart';
+import 'package:netflix_app_clone/core/constants.dart';
+import 'package:netflix_app_clone/presentation/fast_laughs/widgets/fast_laugh_player.dart';
+import 'package:netflix_app_clone/presentation/fast_laughs/widgets/video_actions.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:netflix_app_clone/domain/downloads/models/downloads.dart';
+import 'package:video_player/video_player.dart';
+
+class VideoListItemInheritedWidget extends InheritedWidget {
+  final Widget widget;
+  final Downloads movieData;
+
+  const VideoListItemInheritedWidget({
+    Key? key,
+    required this.widget,
+    required this.movieData,
+  }) : super(key: key, child: widget);
+
+  @override
+  bool updateShouldNotify(covariant VideoListItemInheritedWidget oldWidget) {
+    return oldWidget.movieData != movieData;
+  }
+
+  static VideoListItemInheritedWidget? of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<VideoListItemInheritedWidget>();
+  }
+}
 
 class VideoListItem extends StatelessWidget {
   final int index;
-  const VideoListItem({super.key, required this.index});
+  VideoListItem({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final posterPath =
+        VideoListItemInheritedWidget.of(context)?.movieData.posterPath;
+    final videoUrl = dummyVideoUrls[index % dummyVideoUrls.length];
+    VideoPlayerController _videoPlayerController =
+        VideoPlayerController.network(videoUrl);
     return Stack(
       children: [
-        Container(
-          color: Colors.accents[index % Colors.accents.length],
-        ),
+        FastLaughVideoPlayer(videoUrl: videoUrl, onStateChanged: (bool) {}),
         Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
@@ -37,28 +71,68 @@ class VideoListItem extends StatelessWidget {
                 //bottom right side
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: CircleAvatar(
                         radius: 28,
-                        backgroundImage: NetworkImage(
-                            "https://www.themoviedb.org/t/p/w1280/iWKCxzpgTDOHmh1N92oDLVq7qs4.jpg"),
+                        backgroundImage: posterPath == null
+                            ? null
+                            : NetworkImage("$imageAppendUrl$posterPath"),
                       ),
                     ),
-                    VideoActionsWidget(
-                      icon: Icons.emoji_emotions,
-                      title: 'LOL',
+                    ValueListenableBuilder(
+                      valueListenable: likedVideosIdsNotifier,
+                      builder: (context, Set<int> newLikedListIds, child) {
+                        final _index = index;
+                        if (newLikedListIds.contains(_index)) {
+                          return GestureDetector(
+                            onTap: () {
+                              // BlocProvider.of<FastLaughBloc>(context)
+                              //     .add(UnlikeVideo(id: _index));
+                              likedVideosIdsNotifier.value.remove(_index);
+                              likedVideosIdsNotifier.notifyListeners();
+                            },
+                            child: const VideoActionsWidget(
+                              icon: Icons.emoji_emotions,
+                              title: 'Liked',
+                            ),
+                          );
+                        }
+                        return GestureDetector(
+                          onTap: () {
+                            // BlocProvider.of<FastLaughBloc>(context)
+                            //     .add(LikeVideo(id: _index));
+                            likedVideosIdsNotifier.value.add(_index);
+                            likedVideosIdsNotifier.notifyListeners();
+                          },
+                          child: const VideoActionsWidget(
+                            icon: Icons.emoji_emotions_outlined,
+                            title: 'LOL',
+                          ),
+                        );
+                      },
                     ),
-                    VideoActionsWidget(
+                    const VideoActionsWidget(
                       icon: Icons.add,
                       title: 'My  List',
                     ),
-                    VideoActionsWidget(
-                      icon: Icons.share,
-                      title: 'Share',
+                    GestureDetector(
+                      onTap: () async {
+                        final movieName =
+                            VideoListItemInheritedWidget.of(context)
+                                ?.movieData
+                                .title;
+                        if (movieName != null) {
+                          await Share.share(movieName);
+                        }
+                      },
+                      child: const VideoActionsWidget(
+                        icon: Icons.share,
+                        title: 'Share',
+                      ),
                     ),
-                    VideoActionsWidget(
+                    const VideoActionsWidget(
                       icon: Icons.play_arrow,
                       title: 'Play',
                     ),
@@ -69,36 +143,6 @@ class VideoListItem extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class VideoActionsWidget extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  const VideoActionsWidget(
-      {super.key, required this.icon, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 30,
-          ),
-          Text(
-            title,
-            style: const TextStyle(
-              color: kWhiteColor,
-              fontSize: 16,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

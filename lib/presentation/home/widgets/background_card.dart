@@ -1,22 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app_clone/core/colors.dart';
-import 'package:netflix_app_clone/core/constants.dart';
 import 'package:netflix_app_clone/presentation/home/widgets/custom_button_widget.dart';
 
 class BackgroundCard extends StatelessWidget {
-  const BackgroundCard({super.key});
+  final String imageUrl;
+  const BackgroundCard({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        (imageUrl.isEmpty)
+        ? Container(
           width: double.infinity,
           height: 600,
           decoration: const BoxDecoration(
+            color: Colors.black,
+          ),
+          child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(
+                    Icons.image_not_supported,
+                    size: 100,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Image Not Availiable!!'),
+                ],
+              ),
+          ),
+        )
+        :Container(
+          width: double.infinity,
+          height: 600,
+          decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: AssetImage(kMainImage),
+              image: NetworkImage(imageUrl),
             ),
           ),
         ),

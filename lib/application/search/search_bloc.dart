@@ -1,3 +1,7 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -23,14 +27,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<Initialize>((event, emit) async {
       if (state.idleList.isNotEmpty) {
         emit(
-        SearchState(
-          searchResultList: [],
-          idleList: state.idleList,
-          isLoading: false,
-          isError: false,
-        ),
-      );
-      return;
+          SearchState(
+            searchResultList: [],
+            idleList: state.idleList,
+            isLoading: false,
+            isError: false,
+          ),
+        );
+        return;
       }
 
       emit(
@@ -43,22 +47,21 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       );
       //get trending
       final _result = await _downloadsService.getDownloadsImages();
-      final _state = 
-      _result.fold(
+      final _state = _result.fold(
         (MainFailure f) {
-            return const SearchState(
-              searchResultList: [],
-              idleList: [],
-              isLoading: false,
-              isError: true,
-            );
+          return const SearchState(
+            searchResultList: [],
+            idleList: [],
+            isLoading: false,
+            isError: true,
+          );
         },
         (List<Downloads> list) {
           return SearchState(
-              searchResultList: [],
-              idleList: list,
-              isLoading: false,
-              isError: false,
+            searchResultList: [],
+            idleList: list,
+            isLoading: false,
+            isError: false,
           );
         },
       );
@@ -67,10 +70,39 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     });
 
     //search result state
-    on<SearchMovies>((event, emit) {
+    on<SearchMovies>((event, emit) async {
       // call search movie api
-      _searchService.searchMovies(movieQuery: event.movieQuery);
+      log('searching for ${event.movieQuery}');
+      emit(
+        const SearchState(
+          searchResultList: [],
+          idleList: [],
+          isLoading: true,
+          isError: false,
+        ),
+      );
+      final _result =
+          await _searchService.searchMovies(movieQuery: event.movieQuery);
+      final _state = _result.fold(
+        (MainFailure f) {
+          return const SearchState(
+            searchResultList: [],
+            idleList: [],
+            isLoading: false,
+            isError: true,
+          );
+        },
+        (SearchResp r) {
+          return SearchState(
+            searchResultList: r.results,
+            idleList: [],
+            isLoading: false,
+            isError: false,
+          );
+        },
+      );
       //show to UI
+      emit(_state);
     });
   }
 }

@@ -29,9 +29,28 @@ class SearchIdleWidget extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else if (state.isError) {
-                return const Center(
-                  child: Text('Error while getting data'),
-                );
+                return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.error,
+                      size: 100,
+                      color: Colors.red,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Error while getting data!!",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              );
               } else if (state.idleList.isEmpty) {
                 return const Center(
                   child: Text('List is empty'),

@@ -5,8 +5,21 @@ import 'package:netflix_app_clone/presentation/home/widgets/custom_button_widget
 import 'package:netflix_app_clone/presentation/widgets/video_widget.dart';
 
 class ComingSoonWidget extends StatelessWidget {
+  final String id;
+  final String month;
+  final String day;
+  final String backdropPath;
+  final String movieName;
+  final String description;
+
   const ComingSoonWidget({
     super.key,
+    required this.id,
+    required this.month,
+    required this.day,
+    required this.backdropPath,
+    required this.movieName,
+    required this.description,
   });
 
   @override
@@ -19,18 +32,18 @@ class ComingSoonWidget extends StatelessWidget {
           height: 450,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
+            children: [
               Text(
-                'FEB',
-                style: TextStyle(
+                month,
+                style: const TextStyle(
                   color: kGreyColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
-                '11',
-                style: TextStyle(
+                day,
+                style: const TextStyle(
                   fontSize: 28,
                   letterSpacing: 4,
                   fontWeight: FontWeight.bold,
@@ -40,53 +53,52 @@ class ComingSoonWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: size.width - 50,
+          width: size.width - 80,
           height: 450,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const VideoWidget(),
+              VideoWidget(imageUrl: backdropPath),
               kHeight20,
               Row(
                 children: [
-                  const Text(
-                    'TALL GIRL2',
-                    style: TextStyle(
-                      fontSize: 34,
-                      letterSpacing: 0,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Text(
+                      movieName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        letterSpacing: 0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  const Spacer(),
-                  Row(
-                    children: const [
-                      CustomButtonWidget(
-                        icon: Icons.notifications_outlined,
-                        title: 'Remind Me',
-                        iconSize: 20,
-                        textSize: 10,
-                        textWeight: FontWeight.bold,
-                        textLetterSpacing: 0,
-                        textColor: kGreyColor,
-                      ),
-                      kWidth,
-                      kWidth,
-                      CustomButtonWidget(
-                        icon: Icons.info_outlined,
-                        title: 'Info',
-                        iconSize: 20,
-                        textSize: 10,
-                        textWeight: FontWeight.bold,
-                        textColor: kGreyColor,
-                      ),
-                      kWidth,
-                    ],
+                  const CustomButtonWidget(
+                    icon: Icons.notifications_outlined,
+                    title: 'Remind Me',
+                    iconSize: 20,
+                    textSize: 10,
+                    textWeight: FontWeight.bold,
+                    textLetterSpacing: 0,
+                    textColor: kGreyColor,
                   ),
+                  kWidth,
+                  kWidth,
+                  const CustomButtonWidget(
+                    icon: Icons.info_outlined,
+                    title: 'Info',
+                    iconSize: 20,
+                    textSize: 10,
+                    textWeight: FontWeight.bold,
+                    textColor: kGreyColor,
+                  ),
+                  kWidth,
                 ],
               ),
               kHeight,
               Text(
-                'Coming on Friday',
+                'Coming on $day $month',
                 style: TextStyle(
                   color: kWhiteColor.withOpacity(0.7),
                   fontSize: 16,
@@ -94,19 +106,23 @@ class ComingSoonWidget extends StatelessWidget {
                 ),
               ),
               kHeight,
-              const Text(
-                'Tall Girl 2',
-                style: TextStyle(
+              Text(
+                movieName,
+                style: const TextStyle(
                   color: kWhiteColor,
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               kHeight,
-              const Text(
-                "Landing the lead in the school musical is a dream come true for Jodi, until the pressure sends her confidence --- and her relationship --- into a tailspin.",
-                style:
-                    TextStyle(color: kGreyColor, fontWeight: FontWeight.w600),
+              Text(
+                description,
+                maxLines: 6,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: kGreyColor,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ),
